@@ -3,6 +3,8 @@ import random
 import pyautogui
 import subprocess
 import keyboard as kb
+import webbrowser as web
+import subprocess as sub
 
 def saper():
     # массив поля, * — пустое поле, # — стена
@@ -178,12 +180,103 @@ def catcher():
         time.sleep(1)
         print("______")
               
+def ShipWar():
+    place = [['O','T','O','O','O','O'],
+             ['O','O','O','O','T','O',],
+             ['T','O','T','O','O','O',],
+             ['O','O','O','O','O','O',],
+             ['O','O','O','T','O','O',],
+             ['O','O','O','O','O','T',]]
+
+    place2 = [['I','O','I','O','O','O'],
+              ['O','O','O','O','O','I',],
+              ['I','O','I','O','O','O',],
+              ['I','O','O','O','O','O',],
+              ['O','O','O','I','O','O',],
+              ['O','O','O','O','O','O',]]
+
+    bot_choice = [0,1,2,3,4,5]
+
+    X1 = 0
+    Y1 = 0
+
+    X2 = 0
+    Y2 = 0
+
+    type_start = input()
+    
+    while ('T' in place[0] or 'T' in place[1] or 'T' in place[2] or 'T' in place[3] or 'T' in place[4] or 'T' in place[5]) and ('I' in place2[0] or 'I' in place2[1] or 'I' in place2[2] or 'I' in place2[3] or 'I' in place2[4] or 'I' in place2[5]):
+    
+        print('у каждого по x кораблей')
+
+        Y2 = input()
+        X2 = input()
+        
+        if Y2 == 'таблица' or X2 == 'таблица':
+            for i in place:
+                for y in i:
+                    print(y,end='')
+                print()
+            Y2 = int(input())
+            X2 = int(input())
+            
+        else:
+            if X2 >= 6 or Y2 >= 6:
+                print('не братан, за полем ставить незя')
+        
+            elif X2 <= -1 or Y2 <= -1:
+                print('не братан, за поле не выходи то')
+            else:
+                if place2[Y2][X2] == 'I':
+                    print('поподание!')
+                    place2[Y2][X2] = 'X'
+                    print(place2)
+                else:
+                    place2[Y2][X2] = '0'
+                
+        time.sleep(1)      
+        print('следующий игрок')
+        time.sleep(2)
+        
+        Y1 = random.choice(bot_choice)
+        print(Y1)
+        time.sleep(0.5)
+        X1 = random.choice(bot_choice)
+        print(X1)
+        time.sleep(0.5)
+        
+        time.sleep(1)
+    
+        if X1 >= 6 or Y1 >= 6:
+            print('не братан, за полем ставить незя')
+        
+        elif X1 <= -1 or Y1 <= -1:
+            print('не братан, за поле не выходи то')
+        else:
+            if place[Y1][X1] == 'T':
+                place[Y1][X1] = 'X'
+                print("поподание!")
+            else:
+                place[Y1][X1] = '0'
+    
+        X1 = 0
+        Y1 = 0
+        X2 = 0
+        Y2 = 0
+        
+        time.sleep(1)
+        print("следующий игрок")
+        time.sleep(2)
 
 
 questions1 = ['крепастное право отменил Александр II?', 'крепостное право отменили в 1869 году?', 'первый телефон появился в 1876?']
+answer1 = ['R', 'L', 'R']
 questions2 = ['люди начали делать музыку в эпоху Античности?', 'первые компьютерные игры созданны в 1930 годах?', 'официально доказали что земля круглая в 1543 году?']
+answer2 = ['L', 'L', 'R']
 questions3 = ['Юрий Гагарин полетел в космос в 1967 году?', 'NASA основали в 1958 году?', 'последний открытый бозон "Хиггса" был открыт в 2005 году?']
-questions4 = ['лампочку создал Томас Эдисон в 1879 году?', 'человек попал на луну в 1966 году?', '']
+answer3 = ['L', 'R', 'L']
+questions4 = ['лампочку создал Томас Эдисон в 1879 году?', 'человек попал на луну в 1966 году?', 'я сделал этоу игру по приколу?']
+answer4 = ['R', 'L', 'R']
 q1 = False
 q2 = False
 q3 = False
@@ -193,7 +286,7 @@ print("Здравствуйте, я бот для игр, записей и по
 time.sleep(1)
 print('прошу, если вы открываете меня первый раз то ознакомьтесь с функциями при помощи команды "help"')
 time.sleep(1)
-lst1 = ['"saper" - игра в сапёра', '"catcher" - игра в поймай звезду', '"R or L" - игра в правду или лож', '"ShipWar" - морской бой', '"write" - записать в саписки', '"read" - прочитать записки', '"SawIt" - просмотр названий созданных записок', '"search" - поиск в интернете', '"open" - открыть приложение на компьютере (ТРЕБУЕТСЯ ССЫЛКА)']
+lst1 = ['"saper" - игра в сапёра', '"catcher" - игра в поймай звезду', '"R or L" - игра в правду или лож', '"ShipWar" - морской бой', '"write" - записать в саписки', '"read" - прочитать записки', '"SawIt" - просмотр названий созданных записок', '"search" - поиск в интернете', '"open" - открыть приложение на компьютере (ТРЕБУЕТСЯ ССЫЛКА НА РАСПОЛОЖЕНИЕ)']
 d = dict()
 read = list()
 
@@ -236,4 +329,58 @@ while Enter != 'quit':
         Enter = input('впишите команду: ')
         
     if Enter == "R or L":
+        print("в ответ писать R или L")
+        time.sleep(1)
+        choicer1 = random.choice(question1)
+        x1 = input()
+        if x1 == answer1[choicer1]:
+            q1 = True
+        else:
+            q1 = False
         
+        choicer2 = random.choice(question2)
+        x2 = input()
+        if x2 == answer2[choicer2]:
+            q2 = True
+        else:
+            q2 = False
+        
+        choicer3 = random.choice(question3)
+        x3 = input()
+        if x3 == answer3[choicer3]:
+            q3 = True
+        else:
+            q3 = False
+        
+        choicer4 = random.choice(question4)
+        x4 = input()
+        if x4 == answer4[choicer4]:
+            q4 = True
+        else:
+            q4 = False
+        
+        if q1 and q2 and q3 and q4 == True:
+            print("молодец всё правельно!")
+        elif q1 or q2 or q3 or q4 == False:
+            print("правельно не всё, постарайся лучше в следующий раз")
+        Enter = input("что дальше?: ")
+        
+    if Enter == "search":
+        url = input("впишите ссылку: ")
+        web.open_new_tab(url)
+        #https://youtu.be/Yn-ZhiLrQZc
+        Enter = input("что дальше?: ")
+        
+    if Enter == "open":
+        app = input("впишите ссылку на расположение приложения: ")
+        sub.Popen = (app)
+        #D:\OSU\osu!.exe
+        Enter = input("что дальше?: ")
+        
+    if Enter == "ShipWar":
+        ShipWar()
+        print("игра окончена")
+        time.sleep(1)
+        Enter = input("что дальше?: ")
+        
+print("приходите снова!")
