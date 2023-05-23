@@ -94,8 +94,6 @@ def saper():
                 # значит неправда, поле ещё не всё открыто
                 opened = False
         return opened
-
-#def shipwar():
     
     
 def catcher():
